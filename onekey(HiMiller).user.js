@@ -11,9 +11,9 @@
 
 
 var buttons = [
-    {button:"五星好评", total:5, name:5, history:5, unique:5, location:5, safety:5},
-    {button:"三星勉强", total:5, name:5, history:3, unique:3, location:5, safety:5},
-    {button:"一分滚粗", total:1, name:0, history:0, unique:0, location:1, safety:0},
+    {button:"五", total:5, name:5, history:5, unique:5, location:5, safety:5},
+    {button:"三", total:4, name:5, history:3, unique:3, location:4, safety:5},
+    {button:"一", total:1, name:0, history:0, unique:0, location:1, safety:0},
 ];
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,9 +24,9 @@ var buttons = [
 function rate_portal(total, name, history, unique, location, safety) {
     document.querySelector("#AnswersController > form > div:nth-child(1) > div:nth-child(1) > div.btn-group > button:nth-child(" + total + ")").click();
     if(total !== 1){
-        document.querySelector("#AnswersController > form > div:nth-child(1) > div.col-xs-12.col-sm-4.pull-right.text-center > div:nth-child(5) > button:nth-child(" + name + ")").click();
-        document.querySelector("#AnswersController > form > div:nth-child(1) > div.col-xs-12.col-sm-4.pull-right.text-center > div:nth-child(10) > button:nth-child(" + history + ")").click();
-        document.querySelector("#AnswersController > form > div:nth-child(1) > div.col-xs-12.col-sm-4.pull-right.text-center > div:nth-child(15) > button:nth-child(" + unique + ")").click();
+        document.querySelector("#AnswersController > form > div:nth-child(2) > div.col-xs-12.col-sm-4.pull-right.text-center > div:nth-child(5) > button:nth-child(" + name + ")").click();
+        document.querySelector("#AnswersController > form > div:nth-child(2) > div.col-xs-12.col-sm-4.pull-right.text-center > div:nth-child(10) > button:nth-child(" + history + ")").click();
+        document.querySelector("#AnswersController > form > div:nth-child(2) > div.col-xs-12.col-sm-4.pull-right.text-center > div:nth-child(15) > button:nth-child(" + unique + ")").click();
         document.querySelector("#AnswersController > form > div:nth-child(2) > div:nth-child(1) > div:nth-child(6) > button:nth-child(" + location + ")").click();
         document.querySelector("#AnswersController > form > div:nth-child(2) > div:nth-child(1) > div:nth-child(11) > button:nth-child(" + safety + ")").click();
     }
@@ -71,11 +71,22 @@ function addAtt(){
     body.setAttribute("onkeydown","noNumbers(event)");
     var s = document.createElement('script');
     s.type = 'text/javascript';
-    s.innerHTML='function noNumbers(e){if(e.which){keynum=e.which;}keychar=String.fromCharCode(keynum);console.log(keychar);if(keychar==1){document.getElementsByClassName("big-submit-button")[2].click()}else if(keychar==3){document.getElementsByClassName("big-submit-button")[1].click()}else if(keychar==5){document.getElementsByClassName("big-submit-button")[0].click()}}';
+    s.innerHTML='function noNumbers(e){if(e.which){keynum=e.which;}keychar=String.fromCharCode(keynum);console.log(keychar);if(keychar==1||keychar=="c"){document.getElementsByClassName("big-submit-button")[2].click()}else if(keychar==3||keychar=="b"){document.getElementsByClassName("big-submit-button")[1].click()}else if(keychar==5||keychar=="a"){document.getElementsByClassName("big-submit-button")[0].click()}}';
     body.appendChild(s);
 }
 
+function changeDup(){
+    var descriptionDiv = document.getElementById("descriptionDiv");
+    var dup = descriptionDiv.parentNode.nextSibling.nextSibling.lastChild.previousSibling;
+    var starts = descriptionDiv.nextSibling.nextSibling;
+    descriptionDiv.parentNode.appendChild(dup);
+    descriptionDiv.parentNode.nextSibling.nextSibling.appendChild(starts);
+    descriptionDiv.style.width="16%";
+//    console.log(descriptionDiv);
+}
+
 (function() {
+    changeDup();
     add_button();
     addAtt();
 })();
